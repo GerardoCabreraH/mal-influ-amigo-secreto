@@ -38,7 +38,8 @@
             <div class="p-12 pt-20 text-left">
                 @foreach($players as $player)
                     <p class="mb-2">
-                        El amigo secreto de {{$player->name}} es: {{$player->secretFriend->name}}
+                        <span class="text-blue-500 underline cursor-pointer" @click="copyToClipboard(' {{ route('secret-friend.show', ['game_uuid' => $gameUuid, 'player' => $player->uuid]) }} ')">Copiar enlace</span>
+                        <span>de {{ $player->name }}</span>
                     </p>
                 @endforeach
             </div>
@@ -48,3 +49,17 @@
         </button>
     </div>
 </div>
+
+<script>
+    function copyToClipboard(url) {
+        let tempTextarea = document.createElement('textarea');
+        tempTextarea.value = url;
+        tempTextarea.style.position = 'absolute';
+        tempTextarea.style.left = '-9999px'
+        document.body.appendChild(tempTextarea)
+        tempTextarea.select()
+        document.execCommand('copy')
+        alert('¡Enlace copiado!');
+        document.body.removeChild(tempTextarea)
+    }
+</script>
