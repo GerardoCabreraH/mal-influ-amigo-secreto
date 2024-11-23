@@ -15,18 +15,14 @@
                     <button type="button">X</button>
                 </div>
             </div>
-            <button type="button"
-                class="w-full p-2 font-medium text-gray-900 uppercase bg-gradient-to-b from-gray-300 to-gray-400 md:p-4 hover:from-gray-400 hover:to-gray-500">
+            <button type="button" class="w-full p-2 font-medium text-gray-900 uppercase bg-gradient-to-b from-gray-300 to-gray-400 md:p-4 hover:from-gray-400 hover:to-gray-500">
                 Añadir Jugador
             </button>
-            <button type="button"
-                class="w-full p-2 mt-2 font-medium text-white uppercase bg-gradient-to-b from-gray-700 to-gray-800 md:p-4 hover:from-gray-800 hover:to-gray-900">
+            <button type="button" class="w-full p-2 mt-2 font-medium text-white uppercase bg-gradient-to-b from-gray-700 to-gray-800 md:p-4 hover:from-gray-800 hover:to-gray-900">
                 Empezar Juego
             </button>
         </form>
-        <button type="button"
-            class="w-full p-2 mt-2 font-medium text-gray-900 uppercase bg-white border border-gray-500 md:p-4 hover:bg-gray-100"
-            wire:click="restartGame">
+        <button type="button" class="w-full p-2 mt-2 font-medium text-gray-900 uppercase bg-white border border-gray-500 md:p-4 hover:bg-gray-100">
             Reiniciar Juego
         </button>
     </div>
