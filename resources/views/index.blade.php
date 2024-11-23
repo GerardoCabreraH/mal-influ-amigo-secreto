@@ -16,9 +16,7 @@
 </head>
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <div>
-        <h1 class="text-4xl">Amigo secreto</h1>
-    </div>
+    @livewire('game')
 </body>
 
 </html>
