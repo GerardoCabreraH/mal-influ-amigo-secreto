@@ -11,15 +11,13 @@ class Game extends Component
 {
     public $players;
 
-    private string $gameUuid;
+    public string $gameUuid;
+
+    public $gameStarted = false;
 
     public function mount(): void 
     {
-        $this->players = Collection::times(5, fn () => [
-            'name' => ''
-        ]);
-
-        $this->gameUuid = Str::uuid();
+        $this->initGame();
     }
 
     public function render()
@@ -55,8 +53,34 @@ class Game extends Component
             return Player::create([
                 'name' => $player['name'],
                 'game_uuid' => $this->gameUuid,
-                'uuid' => Str::uuid(),
+                'uuid' => Str::uuid()
             ]);
         });
+
+        $shuffledPlayers = $players->shuffle();
+
+        $shuffledPlayers->each(fn(Player $player, $index) => $player->update([
+            'secret_friend_id' => $shuffledPlayers->get($index + 1)->id ?? $shuffledPlayers->first()->id
+        ]));
+
+        $this->gameStarted = true;
+
+        $this->players = $players;
+    }
+
+    public function restartGame(): void
+    {
+        $this->initGame();
+    }
+
+    private function initGame(): void
+    {
+        $this->players = Collection::times(5, fn() => [
+            'name' => '',
+        ]);
+
+        $this->gameUuid = Str::uuid();
+
+        $this->gameStarted = false;
     }
 }
