@@ -13,6 +13,8 @@
 
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
 </head>
 
 <body>
@@ -34,3 +36,13 @@
 </body>
 
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: {y: 0.6},
+        });
+    })
+</script>

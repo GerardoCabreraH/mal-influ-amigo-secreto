@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Collection;
 use App\Models\Player;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 
 class Game extends Component
 {
@@ -18,6 +19,12 @@ class Game extends Component
     public function mount(): void 
     {
         $this->initGame();
+
+        if (Cookie::has('game_uuid')) {
+            $this->gameUuid = Cookie::get('game_uuid');
+            $this->gameStarted = true;
+            $this->players = Player::where('game_uuid', $this->gameUuid)->get();
+        }
     }
 
     public function render()
@@ -66,11 +73,16 @@ class Game extends Component
         $this->gameStarted = true;
 
         $this->players = $players;
+
+        Cookie::queue('game_uuid', $this->gameUuid, 60 * 24);
     }
 
     public function restartGame(): void
     {
         $this->initGame();
+
+        Cookie::forget('game_uuid');
+        Cookie::expire('game_uuid');
     }
 
     private function initGame(): void
